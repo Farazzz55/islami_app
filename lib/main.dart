@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:islami_project_flutter/home/homeScreen.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:islami_project_flutter/myThemeData.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: HomeScreen.routeName,
       routes: {HomeScreen.routeName: (context) => HomeScreen()},
+      theme: Mythemedata.lightTheme,
     );
   }
 }
