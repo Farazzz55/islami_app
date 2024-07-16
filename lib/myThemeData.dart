@@ -23,6 +23,11 @@ class Mythemedata {
             color: Appcolors.BlackColor,
             fontSize: 22,
             fontWeight: FontWeight.bold),
+        displaySmall: TextStyle(
+          color: Appcolors.BlackColor,
+          fontSize: 25,
+
+        )
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
           selectedIconTheme: IconThemeData(

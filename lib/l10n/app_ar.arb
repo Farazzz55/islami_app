@@ -1,0 +1,11 @@
+{
+"app_title" : "اسلامي" ,
+"sura_name" : "اسم السوره" ,
+"hadeth_name" : "اسم الحديث" ,
+"number_of_sebha" : "عدد التسبيحات" ,
+"eza3a" : "اذاعه القرأن الكريم" ,
+"quran_tab" : "القرأن" ,
+"hadeth_tab" : "الحديث" ,
+"sebha_tab" : "السبحه" ,
+"radio_tab" : "الراديو"
+}

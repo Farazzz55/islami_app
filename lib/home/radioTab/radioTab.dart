@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class Radiotab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class Radiotab extends StatelessWidget {
             height: 222,
           ),
           SizedBox(height: 20,),
-          Text("اذاعه القرأن الكريم",style: Theme.of(context).textTheme.bodyMedium,),
+          Text(AppLocalizations.of(context)!.eza3a,style: Theme.of(context).textTheme.bodyMedium,),
           SizedBox(height: 30,),
           Image(
             image: AssetImage("assets/images/play_radio.png",)

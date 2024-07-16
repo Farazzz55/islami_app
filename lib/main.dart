@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:islami_project_flutter/home/homeScreen.dart';
 import 'package:islami_project_flutter/home/quranTab/Sura_Details.dart';
 import 'package:islami_project_flutter/myThemeData.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'home/hadethTab/Hadeth_Details.dart';
 
 void main() {
@@ -25,6 +25,9 @@ class MyApp extends StatelessWidget {
 
       },
       theme: Mythemedata.lightTheme,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      locale: Locale("ar"),
     );
   }
 }
