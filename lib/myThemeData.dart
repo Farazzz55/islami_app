@@ -32,7 +32,7 @@ class Mythemedata {
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
           selectedIconTheme: IconThemeData(
             color: Appcolors.BlackColor,
-            size: 70,
+            size: 60,
           ),
           unselectedIconTheme: IconThemeData(size: 70)));
 }

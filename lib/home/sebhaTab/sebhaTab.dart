@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class Sebhatab extends StatefulWidget {
   @override
   State<Sebhatab> createState() => _SebhatabState();
@@ -7,8 +8,9 @@ class Sebhatab extends StatefulWidget {
 
 class _SebhatabState extends State<Sebhatab> {
   int count = 0;
-  String kelma = "سبحان الله";
+  List<String> doaa = [ 'الحمدلله', 'لا اله الا الله', 'الله اكبر', 'استغفر الله'];
   double turn = 0;
+  String kelma = 'سبحان الله';
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +73,7 @@ class _SebhatabState extends State<Sebhatab> {
             children: [
               Image(image: AssetImage("assets/images/TextBotton.png")),
               Text(
-                "$kelma",
+                kelma,
                 style: Theme.of(context).textTheme.displaySmall?.copyWith(
                   color: Colors.white,
                 ),
@@ -87,16 +89,9 @@ class _SebhatabState extends State<Sebhatab> {
   void onClick() {
     count++;
     if (count == 33) {
-      kelma = 'الحمدلله';
-    } else if (count == 66) {
-      kelma = 'لااله الا الله';
-    } else if (count == 99) {
-      kelma = 'الله اكبر';
-    } else if (count == 132) {
-      kelma = 'استغفر الله';
-      count=0;
-      kelma="سبحان الله";
+      int index = (doaa.indexOf(kelma) + 1) % doaa.length;
+      kelma = doaa[index];
+      count = 0;
     }
   }
-
 }

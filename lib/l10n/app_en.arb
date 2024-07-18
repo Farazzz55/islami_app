@@ -7,5 +7,12 @@
 "quran_tab" : "Quran" ,
 "hadeth_tab" : "Hadeth" ,
 "sebha_tab" : "Sebha" ,
-"radio_tab" : "Radio"
+"radio_tab" : "Radio",
+"setting_tab" : "Setting" ,
+"language_set" : "Language" ,
+"theme_set" : "Mode",
+"arabic" : "Arabic" ,
+"english" : "English" ,
+"light_mode" : "Light" ,
+"dark_mode" : "Dark"
 }
