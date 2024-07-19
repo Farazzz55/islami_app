@@ -16,7 +16,8 @@ class _LangBottomSheetState extends State<LangBottomSheet> {
   Widget build(BuildContext context) {
     var provider=Provider.of<AppConfigProvider>(context);
     return Container(
-      color: Appcolors.primary_colors_light,
+      color: provider.appTheme == ThemeMode.light?
+      Appcolors.primary_colors_light:Appcolors.primary_colors_night,
       child: Padding(
         padding:  EdgeInsets.symmetric(
           vertical: MediaQuery.of(context).size.height*0.05,

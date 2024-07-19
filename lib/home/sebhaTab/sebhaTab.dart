@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:islami_project_flutter/AppColors.dart';
+import 'package:provider/provider.dart';
+
+import '../../provider/app_config_provider.dart';
 
 class Sebhatab extends StatefulWidget {
   @override
@@ -8,12 +12,19 @@ class Sebhatab extends StatefulWidget {
 
 class _SebhatabState extends State<Sebhatab> {
   int count = 0;
-  List<String> doaa = [ 'الحمدلله', 'لا اله الا الله', 'الله اكبر', 'استغفر الله'];
+  List<String> doaa = ['سبحان الله', 'الحمدلله', 'لا اله الا الله', 'الله اكبر', 'استغفر الله'];
   double turn = 0;
-  String kelma = 'سبحان الله';
+  late String kelma;
+
+  void initState() {
+    super.initState();
+    kelma = doaa[0];
+  }
 
   @override
   Widget build(BuildContext context) {
+    var provider=Provider.of<AppConfigProvider>(context);
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -33,8 +44,9 @@ class _SebhatabState extends State<Sebhatab> {
                   Center(
                     child: Padding(
                       padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.061),
-                      child: Image(
-                        image: AssetImage("assets/images/head of seb7a.png"),
+                      child:  Image(image:provider.appTheme==ThemeMode.light?
+                        AssetImage("assets/images/head of seb7a.png"):
+                        AssetImage("assets/images/head of seb7a night.png"),
                         width: MediaQuery.of(context).size.width * 2.7,
                         height: MediaQuery.of(context).size.height * 0.1,
                       ),
@@ -42,8 +54,10 @@ class _SebhatabState extends State<Sebhatab> {
                   ),
                   Center(
                     child: Image(
-                      image: AssetImage("assets/images/sebha_logo.png"),
-                      width: MediaQuery.of(context).size.width * 0.5,
+                      image:provider.appTheme==ThemeMode.light?
+                      AssetImage("assets/images/sebha_logo.png"):
+                  AssetImage("assets/images/body of seb7a night.png"),
+    width: MediaQuery.of(context).size.width * 0.5,
                       height: MediaQuery.of(context).size.height * 0.5,
                     ),
                   ),
@@ -59,7 +73,9 @@ class _SebhatabState extends State<Sebhatab> {
           Stack(
             alignment: Alignment.center,
             children: [
-              Image(image: AssetImage("assets/images/numberBotton.png")),
+              Image(image:provider.appTheme==ThemeMode.light?
+              AssetImage("assets/images/numberBotton.png"):
+              AssetImage("assets/images/rec number night.png"),),
               Text(
                 "$count",
                 style: Theme.of(context).textTheme.displaySmall,
@@ -71,11 +87,14 @@ class _SebhatabState extends State<Sebhatab> {
           Stack(
             alignment: Alignment.center,
             children: [
-              Image(image: AssetImage("assets/images/TextBotton.png")),
+              Image(image:provider.appTheme==ThemeMode.light?
+              AssetImage("assets/images/TextBotton.png"):
+              AssetImage("assets/images/Rectangle night.png"),),
               Text(
-                kelma,
+                '$kelma',
                 style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                  color: Colors.white,
+                  color: provider.appTheme==ThemeMode.light?
+                  Colors.white:Appcolors.BlackColor
                 ),
                 textAlign: TextAlign.center,
               ),

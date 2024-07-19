@@ -5,26 +5,33 @@ import 'package:islami_project_flutter/home/radioTab/radioTab.dart';
 import 'package:islami_project_flutter/home/sebhaTab/sebhaTab.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islami_project_flutter/home/setting_tab/setting.dart';
+import 'package:islami_project_flutter/provider/app_config_provider.dart';
+import 'package:provider/provider.dart';
+
 class HomeScreen extends StatefulWidget {
   static String routeName = 'homeScreen';
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold();
-  }
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
 
+  List<Widget> tabs = [Qurantab(), Hadethtab(), Sebhatab(), Radiotab(), Setting()];
+
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigProvider>(context);
     return Stack(
       children: [
-        Image.asset("assets/images/bg3.png",
+        provider.appTheme == ThemeMode.light
+            ? Image.asset("assets/images/bg3.png",
+            height: double.infinity, width: double.infinity, fit: BoxFit.fill)
+            : Image.asset("assets/images/bg_night.png",
             height: double.infinity, width: double.infinity, fit: BoxFit.fill),
         Scaffold(
+          backgroundColor: Colors.transparent, // Make scaffold background transparent to show the image
           appBar: AppBar(
             title: Text(
               AppLocalizations.of(context)!.app_title,
@@ -37,35 +44,37 @@ class _HomeScreenState extends State<HomeScreen> {
             child: BottomNavigationBar(
               currentIndex: selectedIndex,
               onTap: (index) {
-                selectedIndex = index;
-                setState(() {});
+                setState(() {
+                  selectedIndex = index;
+                });
               },
               items: [
                 BottomNavigationBarItem(
-                    icon: ImageIcon(AssetImage("assets/images/quran.png")),
-                    label: AppLocalizations.of(context)!.quran_tab,),
+                  icon: ImageIcon(AssetImage("assets/images/quran.png")),
+                  label: AppLocalizations.of(context)!.quran_tab,
+                ),
                 BottomNavigationBarItem(
-                    icon: ImageIcon(AssetImage("assets/images/hadeth.png")),
-                    label: AppLocalizations.of(context)!.hadeth_tab,),
+                  icon: ImageIcon(AssetImage("assets/images/hadeth.png")),
+                  label: AppLocalizations.of(context)!.hadeth_tab,
+                ),
                 BottomNavigationBarItem(
-                    icon: ImageIcon(AssetImage("assets/images/sebha.png")),
-                    label: AppLocalizations.of(context)!.sebha_tab,),
+                  icon: ImageIcon(AssetImage("assets/images/sebha.png")),
+                  label: AppLocalizations.of(context)!.sebha_tab,
+                ),
                 BottomNavigationBarItem(
-                    icon: ImageIcon(AssetImage("assets/images/radio.png")),
-                    label: AppLocalizations.of(context)!.radio_tab,),
+                  icon: ImageIcon(AssetImage("assets/images/radio.png")),
+                  label: AppLocalizations.of(context)!.radio_tab,
+                ),
                 BottomNavigationBarItem(
                   icon: Icon(Icons.settings),
-                  label: AppLocalizations.of(context)!.setting_tab
-                  ),
+                  label: AppLocalizations.of(context)!.setting_tab,
+                ),
               ],
             ),
           ),
-          body:
-          Tabs[selectedIndex],
-        )
+          body: tabs[selectedIndex],
+        ),
       ],
     );
   }
-
-  List<Widget> Tabs = [Qurantab(), Hadethtab(), Sebhatab(), Radiotab() , Setting()];
 }

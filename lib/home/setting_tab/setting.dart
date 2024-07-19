@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islami_project_flutter/AppColors.dart';
 import 'package:islami_project_flutter/home/setting_tab/lang_bottom_sheet.dart';
+import 'package:islami_project_flutter/home/setting_tab/theme_bottom_sheet.dart';
 import 'package:islami_project_flutter/provider/app_config_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Setting extends StatefulWidget {
   @override
@@ -38,8 +40,8 @@ class _SettingState extends State<Setting> {
                   horizontal: MediaQuery.of(context).size.width*0.01
               ),
               decoration: BoxDecoration(
-                color: Appcolors.primary_colors_light,
-                borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height*0.02),
+                color: provider.appTheme == ThemeMode.light?
+                Appcolors.primary_colors_light:Appcolors.yellow_color,                borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height*0.02),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -49,7 +51,6 @@ class _SettingState extends State<Setting> {
                     AppLocalizations.of(context)!.english:
                    AppLocalizations.of(context)!.arabic,
 
-    // Placeholder for the language setting
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   Icon(Icons.arrow_drop_down),
@@ -65,6 +66,7 @@ class _SettingState extends State<Setting> {
           SizedBox(height: MediaQuery.of(context).size.height*0.01),
           InkWell(
             onTap: (){
+              showThemeBottomSheet();
 
             },
             child: Container(
@@ -73,21 +75,41 @@ class _SettingState extends State<Setting> {
                   horizontal: MediaQuery.of(context).size.width*0.01
               ),
               decoration: BoxDecoration(
-                color: Appcolors.primary_colors_light,
+                color: provider.appTheme == ThemeMode.light?
+              Appcolors.primary_colors_light:Appcolors.yellow_color,
                 borderRadius: BorderRadius.circular(MediaQuery.of(context).size.height*0.02),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Light', // Placeholder for the theme setting
+                    provider.appTheme==ThemeMode.light?
+                    AppLocalizations.of(context)!.light_mode:
+                    AppLocalizations.of(context)!.dark_mode,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   Icon(Icons.arrow_drop_down),
                 ],
               ),
+
             ),
           ),
+          SizedBox(height: MediaQuery.of(context).size.height*0.05),
+          Center(
+            child: TextButton(onPressed: () async {
+              await provider.saveSettings();
+    }, child: Text('Save',style: provider.appTheme==ThemeMode.light?
+            Theme.of(context).textTheme.bodyMedium:
+            Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: Colors.white
+            )),
+              style: TextButton.styleFrom(
+                backgroundColor: provider.appTheme==ThemeMode.light?
+                Appcolors.primary_colors_light : Appcolors.yellow_color
+
+              )
+
+            ),),
         ],
       ),
     );
@@ -98,4 +120,9 @@ class _SettingState extends State<Setting> {
         builder: (context)=>LangBottomSheet()
     );
   }
+
+  void showThemeBottomSheet() {
+    showModalBottomSheet(context: context, builder: (context)=>ThemeBottomSheet());
+  }
+
 }

@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:islami_project_flutter/AppColors.dart';
 import 'package:islami_project_flutter/home/hadethTab/ItemHadethDetails.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:islami_project_flutter/provider/app_config_provider.dart';
+import 'package:provider/provider.dart';
 class Hadethtab extends StatefulWidget {
   @override
   State<Hadethtab> createState() => _HadethtabState();
@@ -13,6 +15,7 @@ class _HadethtabState extends State<Hadethtab> {
 
   @override
   Widget build(BuildContext context) {
+    var provider=Provider.of<AppConfigProvider>(context);
     if(hadethListC.isEmpty){
     loadHadethFile();
     }
@@ -20,7 +23,8 @@ class _HadethtabState extends State<Hadethtab> {
       children: [
         Image(image: AssetImage("assets/images/hadeth_logo.png")),
         Divider(
-          color: Appcolors.primary_colors_light,
+          color: provider.appTheme == ThemeMode.light?
+          Appcolors.primary_colors_light:Appcolors.yellow_color,
           thickness: 3,
         ),
         Text(
@@ -28,7 +32,8 @@ class _HadethtabState extends State<Hadethtab> {
           style: Theme.of(context).textTheme.bodyMedium,
         ),
         Divider(
-          color: Appcolors.primary_colors_light,
+          color: provider.appTheme == ThemeMode.light?
+          Appcolors.primary_colors_light:Appcolors.yellow_color,
           thickness: 3,
         ),
         Expanded(
@@ -36,13 +41,15 @@ class _HadethtabState extends State<Hadethtab> {
           child: hadethListC.isEmpty?
               Center(
              child: CircularProgressIndicator(
-               color: Appcolors.primary_colors_light,
+                 color: provider.appTheme == ThemeMode.light?
+                 Appcolors.primary_colors_light:Appcolors.yellow_color,
              )):
           ListView.separated(
             separatorBuilder: (context, index) {
               return Divider(
-                color: Appcolors.primary_colors_light,
-                thickness: 1,
+                color: provider.appTheme == ThemeMode.light?
+                Appcolors.primary_colors_light:Appcolors.yellow_color,
+                thickness: 2,
               );
             },
             itemBuilder: (context, index) {
